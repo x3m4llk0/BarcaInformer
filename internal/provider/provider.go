@@ -2,11 +2,12 @@ package provider
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 )
 
-func GetInfo() (*http.Response, error) {
+func GetInfo() (string, error) {
 	url := "https://api.football-data.org/v4/teams/81/matches?status=SCHEDULED&limit=4"
 	apiToken := "bd2bea287209438496914236fb543609"
 	tokenHeader := "X-Auth-Token"
@@ -27,7 +28,12 @@ func GetInfo() (*http.Response, error) {
 	}
 	defer resp.Body.Close()
 
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
 	// Handle the response
 	fmt.Printf("Response Status: %s\n", resp.Status)
-	return resp, nil
+	return string(body), nil
 }

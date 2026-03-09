@@ -49,14 +49,14 @@ type Competition struct {
 	Emblem string `json:"emblem"`
 }
 
-type GetInfoResult struct {
+type MatchInfo struct {
 	Competition Competition `json:"competition"`
 	HomeTeam    Team        `json:"homeTeam"`
 	AwayTeam    Team        `json:"awayTeam"`
 	UtcDate     time.Time   `json:"utcDate"`
 }
 
-func GetInfo() (GetInfoResult, error) {
+func GetInfo() (MatchInfo, error) {
 	url := "https://api.football-data.org/v4/teams/81/matches?status=SCHEDULED&limit=1"
 	apiToken := "bd2bea287209438496914236fb543609"
 	tokenHeader := "X-Auth-Token"
@@ -82,7 +82,7 @@ func GetInfo() (GetInfoResult, error) {
 	var unmarshresult Result
 	json.Unmarshal(body, &unmarshresult)
 
-	var GetInfoResult GetInfoResult
+	var GetInfoResult MatchInfo
 	json.Unmarshal(body, &GetInfoResult)
 
 	GetInfoResult.Competition = unmarshresult.Matches[0].Competition

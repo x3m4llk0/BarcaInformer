@@ -16,21 +16,21 @@ type Result struct {
 }
 
 type Matches struct {
-	Area        map[string]interface{} `json:"area"`
-	Competition Competition            `json:"competition"`
-	Season      map[string]interface{} `json:"season"`
-	Id          int                    `json:"id"`
-	UtcDate     time.Time              `json:"utcDate"`
-	Status      string                 `json:"status"`
-	MatchDay    int                    `json:"matchday"`
-	Stage       string                 `json:"stage"`
-	Group       string                 `json:"group"`
-	LastUpdated time.Time              `json:"lastUpdated"`
-	HomeTeam    Team                   `json:"homeTeam"`
-	AwayTeam    Team                   `json:"awayTeam"`
-	Score       map[string]interface{} `json:"score"`
-	Odds        map[string]interface{} `json:"odds"`
-	Referees    map[string]interface{} `json:"referees"`
+	Area        map[string]interface{}   `json:"area"`
+	Competition Competition              `json:"competition"`
+	Season      map[string]interface{}   `json:"season"`
+	Id          int                      `json:"id"`
+	UtcDate     time.Time                `json:"utcDate"`
+	Status      string                   `json:"status"`
+	MatchDay    int                      `json:"matchday"`
+	Stage       string                   `json:"stage"`
+	Group       string                   `json:"group"`
+	LastUpdated time.Time                `json:"lastUpdated"`
+	HomeTeam    Team                     `json:"homeTeam"`
+	AwayTeam    Team                     `json:"awayTeam"`
+	Score       map[string]interface{}   `json:"score"`
+	Odds        map[string]interface{}   `json:"odds"`
+	Referees    []map[string]interface{} `json:"referees"`
 }
 
 type Team struct {

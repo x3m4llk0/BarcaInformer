@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+vars:
+  IMAGE_NAME: barca-informer
+
+tasks:
+  test:
+    cmd: go test ./...
+    desc: Run tests
+
+  docker-build:
+    cmds:
+      - docker build -t {{.IMAGE_NAME}} .
+    desc:
+      Build docker
+
+  docker-run:
+    cmds:
+      - docker run --rm {{.IMAGE_NAME}}
+    desc:
+      Run docker
+    deps:
+      - task: docker-build

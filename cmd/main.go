@@ -1,17 +1,17 @@
 package main
 
 import (
-	"BarcaInformer/internal/notifier"
-	"BarcaInformer/internal/provider"
-	"fmt"
+	"BarcaInformer/internal/bot"
+	"log"
 )
 
 func main() {
-	response, err := provider.GetInfo()
+	telegramBot, err := bot.New("1861694539:AAFCmesajfWX0289V_jxEJ1wlyfYhTv_-nI")
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
-	fmt.Println(response)
 
-	err = notifier.SendMessage(response)
+	if err := telegramBot.Run(); err != nil {
+		log.Fatal(err)
+	}
 }

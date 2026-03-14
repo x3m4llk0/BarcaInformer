@@ -1,9 +1,8 @@
-# yaml-language-server: $schema=https://taskfile.dev/schema.json
-
 version: '3'
 
 vars:
   IMAGE_NAME: barca-informer
+  CONTAINER_NAME: barca-informer
 
 tasks:
   test:
@@ -13,13 +12,21 @@ tasks:
   docker-build:
     cmds:
       - docker build -t {{.IMAGE_NAME}} .
-    desc:
-      Build docker
+    desc: Build docker image
+
+  docker-stop:
+    cmds:
+      - docker rm -f {{.CONTAINER_NAME}} || true
+    desc: Stop and remove old container
 
   docker-run:
     cmds:
-      - docker run -d {{.IMAGE_NAME}}
-    desc:
-      Run docker
-    deps:
+      - docker run -d --name {{.CONTAINER_NAME}} --restart unless-stopped {{.IMAGE_NAME}}
+    desc: Run docker container
+
+  deploy:
+    desc: Rebuild and restart app on server
+    cmds:
       - task: docker-build
+      - task: docker-stop
+      - task: docker-run

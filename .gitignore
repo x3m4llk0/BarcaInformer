@@ -1,3 +1,14 @@
 .idea/
 .env
 *.log
+.DS_Store
+
+# Go build artifacts
+main
+*.exe
+*.out
+*.test
+coverage.out
+
+# Editor and local files
+.vscode/
